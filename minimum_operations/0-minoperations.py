@@ -1,20 +1,20 @@
 #!/usr/bin/python3
-"""Minimum Operations"""
+
+'''Minimum operations'''
 
 
 def minOperations(n):
     if n == 1:
-        return 0  # No operations needed, already have 1 H
+        return 0
 
-    operations = [float('inf')] * (n + 1)
-    operations[1] = 0
+    operations = 0
+    divisor = 2
 
-    for i in range(2, n + 1):
-        j = 2
-        while j * j <= i:
-            if i % j == 0:
-                operations[i] = min(operations[i], operations[j] + i // j)
-                operations[i] = min(operations[i], operations[i // j] + j)
-            j += 1
+    while n > 1:
+        if n % divisor == 0:
+            n //= divisor
+            operations += divisor
+        else:
+            divisor += 1
 
-    return operations[n] if operations[n] != float('inf') else 0
+    return operations
